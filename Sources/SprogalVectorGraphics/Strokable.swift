@@ -218,6 +218,7 @@ extension Strokable {
     @discardableResult
     public func setStrokeStart(to strokeStart: Scalar) -> Self {
         precondition(strokeStart >= 0 && strokeStart <= 1, "Stroke start must be between 0 and 1.")
+        precondition(strokeStart <= self.currentStrokeEnd, "Stroke start must not exceed stroke end.")
         self.strokeStart = Track(strokeStart)
         return self
     }
@@ -235,6 +236,7 @@ extension Strokable {
     @discardableResult
     public func setStrokeEnd(to strokeEnd: Scalar) -> Self {
         precondition(strokeEnd >= 0 && strokeEnd <= 1, "Stroke end must be between 0 and 1.")
+        precondition(strokeEnd >= self.currentStrokeStart, "Stroke end must not be less than stroke start.")
         self.strokeEnd = Track(strokeEnd)
         return self
     }
